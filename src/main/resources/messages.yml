@@ -1,0 +1,160 @@
+# =====================================================================
+#  CustomEssentials - Messages
+#  Supports & color codes and &#RRGGBB hex. {placeholders} are replaced.
+#  The {prefix} placeholder pulls general.prefix from config.yml.
+# =====================================================================
+
+no-permission: "{prefix}&cYou don't have permission to do that."
+player-only: "{prefix}&cOnly players can use this command."
+player-not-found: "{prefix}&cPlayer &e{player}&c is not online."
+unknown-command-usage: "{prefix}&cUsage: &7{usage}"
+feature-disabled: "{prefix}&cThat feature is disabled on this server."
+reloaded: "{prefix}&aConfiguration reloaded."
+
+homes:
+  set: "{prefix}&aHome &e{home}&a set."
+  deleted: "{prefix}&aHome &e{home}&a deleted."
+  not-found: "{prefix}&cYou have no home named &e{home}&c."
+  teleporting: "{prefix}&7Teleporting to &e{home}&7..."
+  list: "{prefix}&7Your homes: &f{homes}"
+  none: "{prefix}&7You have no homes set. Use &f/sethome&7."
+  limit-reached: "{prefix}&cYou've reached your home limit (&e{max}&c)."
+
+warps:
+  set: "{prefix}&aWarp &e{warp}&a created."
+  deleted: "{prefix}&aWarp &e{warp}&a deleted."
+  not-found: "{prefix}&cThere is no warp named &e{warp}&c."
+  teleporting: "{prefix}&7Warping to &e{warp}&7..."
+  list: "{prefix}&7Warps: &f{warps}"
+  none: "{prefix}&7There are no warps."
+
+spawn:
+  set: "{prefix}&aSpawn location set."
+  teleporting: "{prefix}&7Teleporting to spawn..."
+  not-set: "{prefix}&cSpawn has not been set yet."
+
+teleport:
+  warmup: "{prefix}&7Don't move &e{seconds}s&7..."
+  cancelled-move: "{prefix}&cTeleport cancelled - you moved."
+  done: "{prefix}&aTeleported."
+
+tpa:
+  sent: "{prefix}&aRequest sent to &e{target}&a."
+  sent-here: "{prefix}&aRequest sent to &e{target}&a to teleport to you."
+  received: "{prefix}&e{sender}&7 wants to teleport to you. &a/tpaccept &7or &c/tpdeny"
+  received-here: "{prefix}&e{sender}&7 wants you to teleport to them. &a/tpaccept &7or &c/tpdeny"
+  none-pending: "{prefix}&cYou have no pending requests."
+  accepted: "{prefix}&aRequest accepted."
+  denied: "{prefix}&cRequest denied."
+  expired: "{prefix}&cThat teleport request expired."
+
+back:
+  none: "{prefix}&cNo previous location to return to."
+  teleporting: "{prefix}&7Returning to your previous location..."
+
+player:
+  healed: "{prefix}&aYou have been healed."
+  healed-other: "{prefix}&aHealed &e{player}&a."
+  fed: "{prefix}&aYour hunger has been satisfied."
+  fed-other: "{prefix}&aFed &e{player}&a."
+  fly-on: "{prefix}&aFlight enabled."
+  fly-off: "{prefix}&cFlight disabled."
+  fly-other: "{prefix}&aToggled flight for &e{player}&a: &7{state}"
+  gamemode: "{prefix}&aGame mode set to &e{mode}&a."
+  gamemode-other: "{prefix}&aSet &e{player}&a's game mode to &e{mode}&a."
+  repaired: "{prefix}&aItem repaired."
+  repaired-all: "{prefix}&aAll items repaired."
+  nothing-to-repair: "{prefix}&cThat item can't be repaired."
+  inventory-cleared: "{prefix}&aInventory cleared."
+  inventory-cleared-other: "{prefix}&aCleared &e{player}&a's inventory."
+  hat-set: "{prefix}&aEnjoy your new hat!"
+  hat-empty: "{prefix}&cHold an item to wear it as a hat."
+  near: "{prefix}&7Nearby (&e{radius}&7): &f{players}"
+  near-none: "{prefix}&7No players nearby."
+  more: "{prefix}&aStack filled."
+  more-empty: "{prefix}&cHold an item first."
+
+afk:
+  now-afk: "&7* &e{player}&7 is now AFK."
+  no-longer-afk: "&7* &e{player}&7 is no longer AFK."
+
+kit:
+  claimed: "{prefix}&aYou claimed the &e{kit}&a kit."
+  not-found: "{prefix}&cThere is no kit named &e{kit}&c."
+  no-permission: "{prefix}&cYou don't have access to the &e{kit}&c kit."
+  cooldown: "{prefix}&cYou must wait &e{time}&c before claiming &e{kit}&c again."
+  one-time-used: "{prefix}&cYou have already claimed the one-time kit &e{kit}&c."
+  inventory-full: "{prefix}&cYour inventory is full - dropped extra items on the ground."
+  list: "{prefix}&7Available kits: &f{kits}"
+  given: "{prefix}&aGave the &e{kit}&a kit to &e{player}&a."
+  received: "{prefix}&aYou received the &e{kit}&a kit."
+
+vanish:
+  on: "{prefix}&7You are now &avanished&7."
+  off: "{prefix}&7You are no longer vanished."
+
+god:
+  on: "{prefix}&aGod mode enabled."
+  off: "{prefix}&cGod mode disabled."
+  other: "{prefix}&aGod mode for &e{player}&a: &7{state}"
+
+freeze:
+  frozen: "{prefix}&b{player}&7 has been &cfrozen&7."
+  unfrozen: "{prefix}&b{player}&7 has been &aunfrozen&7."
+  you-are-frozen: "{prefix}&cYou are frozen. Do not log out."
+  cannot-move: "{prefix}&cYou cannot move while frozen."
+
+staffchat:
+  toggled-on: "{prefix}&aStaff chat toggled ON. Your messages now go to staff chat."
+  toggled-off: "{prefix}&cStaff chat toggled OFF."
+
+moderation:
+  kicked: "{prefix}&e{player}&7 was kicked. &8({reason})"
+  kick-screen: "&cYou were kicked.\n&7Reason: &f{reason}"
+  banned: "{prefix}&e{player}&7 was banned. &8({reason})"
+  ban-screen: "&cYou are banned from this server.\n&7Reason: &f{reason}"
+  tempban-screen: "&cYou are temporarily banned.\n&7Reason: &f{reason}\n&7Expires: &f{expires}"
+  unbanned: "{prefix}&e{player}&7 was unbanned."
+  not-banned: "{prefix}&cThat player is not banned."
+  muted: "{prefix}&e{player}&7 was muted. &8({reason})"
+  muted-temp: "{prefix}&e{player}&7 was muted for &e{duration}&7. &8({reason})"
+  unmuted: "{prefix}&e{player}&7 was unmuted."
+  you-are-muted: "{prefix}&cYou are muted and cannot chat."
+  invalid-duration: "{prefix}&cInvalid duration. Use e.g. 10m, 2h, 1d, 7d."
+
+broadcast:
+  format: "&8[&c&lBroadcast&8] &f{message}"
+
+message:
+  no-target: "{prefix}&cThere is no one to reply to."
+  self: "{prefix}&cYou can't message yourself."
+
+# These keys back the /rank command. They use the same {prefix}, & color,
+# &#RRGGBB and {placeholder} support as the rest of messages.yml.
+
+rank:
+  usage: "{prefix}&7Usage: &f/rank <list|info|set|reload>"
+  list: "{prefix}&7Ranks: &f{ranks}"
+  info: "{prefix}&f{player} &7has rank &f{rank}"
+  set: "{prefix}&7Set &f{player}&7's rank to &f{rank}"
+  not-found: "{prefix}&cNo rank named &f{rank}&c."
+  reloaded: "{prefix}&aRanks reloaded."
+
+economy:
+  balance-self: "{prefix}&7Balance: &a{amount}"
+  balance-other: "{prefix}&f{player}&7's balance: &a{amount}"
+  paid: "{prefix}&7You paid &f{player} &a{amount}&7."
+  received: "{prefix}&7You received &a{amount} &7from &f{player}&7."
+  insufficient-funds: "{prefix}&cYou don't have enough money."
+  invalid-amount: "{prefix}&cInvalid amount."
+  min-payment: "{prefix}&cMinimum payment is &f{amount}&c."
+  cannot-pay-self: "{prefix}&cYou can't pay yourself."
+  pay-disabled: "{prefix}&cPayments are currently disabled."
+  player-never-joined: "{prefix}&cThat player has never joined the server."
+  eco-give: "{prefix}&7Gave &a{amount} &7to &f{player}&7. New balance: &a{balance}"
+  eco-take: "{prefix}&7Took &c{amount} &7from &f{player}&7. New balance: &a{balance}"
+  eco-set: "{prefix}&7Set &f{player}&7's balance to &a{amount}&7."
+  eco-reset: "{prefix}&7Reset &f{player}&7's balance to &a{amount}&7."
+  eco-usage: "{prefix}&7Usage: &f/eco <give|take|set|reset> <player> [amount]"
+  baltop-header: "{prefix}&7Top balances:"
+  baltop-entry: "&7#{rank} &f{player} &7- &a{amount}"

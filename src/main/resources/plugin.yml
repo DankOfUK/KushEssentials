@@ -1,0 +1,340 @@
+name: KushEssentials
+version: '${project.version}'
+main: com.kushsmp.essentials.CustomEssentials
+api-version: '1.21'
+author: DankOfUK
+description: Custom Essentials-style core with staff & regular feature separation made for KushSMP
+website: https://example.com
+
+softdepend: [PlaceholderAPI, Vault]
+
+commands:
+  # ---------- Teleport / Homes / Warps ----------
+  sethome:
+    description: Set a home at your location.
+    usage: /sethome [name]
+  home:
+    description: Teleport to one of your homes.
+    usage: /home [name]
+  delhome:
+    description: Delete one of your homes.
+    usage: /delhome <name>
+  homes:
+    description: List your homes.
+    usage: /homes
+  setwarp:
+    description: Create a server warp.
+    usage: /setwarp <name>
+  warp:
+    description: Teleport to a warp.
+    usage: /warp <name>
+  delwarp:
+    description: Delete a warp.
+    usage: /delwarp <name>
+  warps:
+    description: List all warps.
+    usage: /warps
+  spawn:
+    description: Teleport to spawn.
+    usage: /spawn
+  setspawn:
+    description: Set the server spawn.
+    usage: /setspawn
+  tpa:
+    description: Request to teleport to a player.
+    usage: /tpa <player>
+  tpahere:
+    description: Request a player teleport to you.
+    usage: /tpahere <player>
+  tpaccept:
+    description: Accept a pending teleport request.
+    usage: /tpaccept
+    aliases: [tpyes]
+  tpdeny:
+    description: Deny a pending teleport request.
+    usage: /tpdeny
+    aliases: [tpno]
+  tp:
+    description: Teleport to a player (staff).
+    usage: /tp <player> [target]
+  tphere:
+    description: Teleport a player to you (staff).
+    usage: /tphere <player>
+  back:
+    description: Return to your previous location.
+    usage: /back
+
+  # ---------- Player utilities ----------
+  heal:
+    description: Heal yourself or another player.
+    usage: /heal [player]
+  feed:
+    description: Feed yourself or another player.
+    usage: /feed [player]
+  fly:
+    description: Toggle flight for yourself or another player.
+    usage: /fly [player]
+  gamemode:
+    description: Change game mode.
+    usage: /gamemode <survival|creative|adventure|spectator> [player]
+    aliases: [gm]
+  gmc:
+    description: Set creative mode.
+    usage: /gmc [player]
+  gms:
+    description: Set survival mode.
+    usage: /gms [player]
+  gma:
+    description: Set adventure mode.
+    usage: /gma [player]
+  gmsp:
+    description: Set spectator mode.
+    usage: /gmsp [player]
+  enderchest:
+    description: Open your ender chest.
+    usage: /enderchest
+    aliases: [ec]
+  workbench:
+    description: Open a crafting table.
+    usage: /workbench
+    aliases: [wb, craft]
+  anvil:
+    description: Open an anvil.
+    usage: /anvil
+  repair:
+    description: Repair the item in your hand.
+    usage: /repair [all]
+  clearinventory:
+    description: Clear your inventory.
+    usage: /clearinventory [player]
+    aliases: [ci, clear]
+  hat:
+    description: Wear the item in your hand as a hat.
+    usage: /hat
+  near:
+    description: List nearby players.
+    usage: /near [radius]
+  afk:
+    description: Toggle AFK status.
+    usage: /afk
+  msg:
+    description: Send a private message.
+    usage: /msg <player> <message>
+    aliases: [tell, w, whisper]
+  reply:
+    description: Reply to the last private message.
+    usage: /reply <message>
+    aliases: [r]
+
+  # ---------- Kits ----------
+  kit:
+    description: Claim a kit.
+    usage: /kit [name]
+    aliases: [kits]
+  givekit:
+    description: Give a kit to a player (staff).
+    usage: /givekit <kit> <player>
+
+  # ---------- Staff ----------
+  vanish:
+    description: Toggle vanish.
+    usage: /vanish
+    aliases: [v]
+  god:
+    description: Toggle invulnerability.
+    usage: /god [player]
+  freeze:
+    description: Freeze/unfreeze a player.
+    usage: /freeze <player>
+  staffchat:
+    description: Toggle/send staff chat.
+    usage: /staffchat [message]
+    aliases: [sc]
+  broadcast:
+    description: Broadcast a message.
+    usage: /broadcast <message>
+    aliases: [bc]
+  kick:
+    description: Kick a player.
+    usage: /kick <player> [reason]
+  ban:
+    description: Ban a player.
+    usage: /ban <player> [reason]
+  tempban:
+    description: Temporarily ban a player.
+    usage: /tempban <player> <duration> [reason]
+  unban:
+    description: Unban a player.
+    usage: /unban <player>
+    aliases: [pardon]
+  mute:
+    description: Mute a player.
+    usage: /mute <player> [duration] [reason]
+  unmute:
+    description: Unmute a player.
+    usage: /unmute <player>
+  invsee:
+    description: View a player's inventory.
+    usage: /invsee <player>
+  more:
+    description: Fill the held item stack.
+    usage: /more
+
+  # ---------- Admin ----------
+  ess:
+    description: Plugin admin command (reload, info).
+    usage: /ess <reload|version>
+    aliases: [customessentials, cess]
+  rank:
+    description: Manage player ranks.
+    usage: /rank <list|info|set|reload>
+
+  # ---------- Economy ----------
+  balance:
+    description: Check a balance.
+    usage: /balance [player]
+    aliases: [bal, money]
+  pay:
+    description: Pay another player.
+    usage: /pay <player> <amount>
+  baltop:
+    description: Show the richest players.
+    usage: /baltop
+    aliases: [balancetop]
+  eco:
+    description: Adjust balances (admin).
+    usage: /eco <give|take|set|reset> <player> [amount]
+    aliases: [economy]
+
+permissions:
+  # Wildcard bundles
+  essentials.*:
+    description: Grants every CustomEssentials permission.
+    default: op
+    children:
+      essentials.staff: true
+      essentials.player: true
+      essentials.admin: true
+
+  essentials.player:
+    description: Bundle of all regular-player permissions.
+    default: true
+    children:
+      essentials.home: true
+      essentials.sethome: true
+      essentials.delhome: true
+      essentials.warp: true
+      essentials.spawn: true
+      essentials.tpa: true
+      essentials.back: true
+      essentials.kit: true
+      essentials.enderchest: true
+      essentials.workbench: true
+      essentials.anvil: true
+      essentials.hat: true
+      essentials.near: true
+      essentials.afk: true
+      essentials.msg: true
+      essentials.balance: true
+      essentials.pay: true
+      essentials.balancetop: true
+
+  essentials.staff:
+    description: Bundle of all staff permissions.
+    default: op
+    children:
+      essentials.vanish: true
+      essentials.god: true
+      essentials.freeze: true
+      essentials.staffchat: true
+      essentials.broadcast: true
+      essentials.kick: true
+      essentials.ban: true
+      essentials.tempban: true
+      essentials.unban: true
+      essentials.mute: true
+      essentials.unmute: true
+      essentials.invsee: true
+      essentials.more: true
+      essentials.heal: true
+      essentials.feed: true
+      essentials.fly: true
+      essentials.gamemode: true
+      essentials.tp: true
+      essentials.tphere: true
+      essentials.clearinventory: true
+      essentials.repair: true
+      essentials.givekit: true
+      essentials.tp.others: true
+      essentials.heal.others: true
+      essentials.feed.others: true
+      essentials.fly.others: true
+
+  essentials.admin:
+    description: Bundle of admin permissions.
+    default: op
+    children:
+      essentials.setwarp: true
+      essentials.delwarp: true
+      essentials.setspawn: true
+      essentials.reload: true
+      essentials.kit.admin: true
+      essentials.rank.admin: true
+      essentials.eco: true
+
+  # Individual permissions (defaults)
+  essentials.home: { default: true }
+  essentials.sethome: { default: true }
+  essentials.delhome: { default: true }
+  essentials.warp: { default: true }
+  essentials.setwarp: { default: op }
+  essentials.delwarp: { default: op }
+  essentials.spawn: { default: true }
+  essentials.setspawn: { default: op }
+  essentials.tpa: { default: true }
+  essentials.tp: { default: op }
+  essentials.tp.others: { default: op }
+  essentials.tphere: { default: op }
+  essentials.back: { default: true }
+  essentials.heal: { default: op }
+  essentials.heal.others: { default: op }
+  essentials.feed: { default: op }
+  essentials.feed.others: { default: op }
+  essentials.fly: { default: op }
+  essentials.fly.others: { default: op }
+  essentials.gamemode: { default: op }
+  essentials.enderchest: { default: true }
+  essentials.workbench: { default: true }
+  essentials.anvil: { default: true }
+  essentials.repair: { default: op }
+  essentials.clearinventory: { default: op }
+  essentials.hat: { default: true }
+  essentials.near: { default: true }
+  essentials.afk: { default: true }
+  essentials.msg: { default: true }
+  essentials.kit: { default: true }
+  essentials.kit.admin: { default: op }
+  essentials.givekit: { default: op }
+  essentials.vanish: { default: op }
+  essentials.god: { default: op }
+  essentials.freeze: { default: op }
+  essentials.staffchat: { default: op }
+  essentials.staffchat.receive: { default: op }
+  essentials.broadcast: { default: op }
+  essentials.kick: { default: op }
+  essentials.ban: { default: op }
+  essentials.tempban: { default: op }
+  essentials.unban: { default: op }
+  essentials.mute: { default: op }
+  essentials.unmute: { default: op }
+  essentials.invsee: { default: op }
+  essentials.more: { default: op }
+  essentials.reload: { default: op }
+  essentials.rank: { default: true }
+  essentials.rank.admin: { default: op }
+  essentials.balance: { default: true }
+  essentials.balance.others: { default: op }
+  essentials.pay: { default: true }
+  essentials.balancetop: { default: true }
+  essentials.eco: { default: op }
+  # Per-kit permission pattern: essentials.kit.<kitname>

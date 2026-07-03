@@ -1,0 +1,73 @@
+# =====================================================================
+#  KushEssentials - Ranks
+# =====================================================================
+# Each player has exactly one rank. If they have none assigned, the
+# default-rank below is used.
+#
+#   display      friendly name shown by /rank info and %kush_rank%
+#   prefix       shown before the name in tab/chat (supports & and &#RRGGBB)
+#   suffix       shown after the name
+#   color        color applied to the player's name in the tab list
+#   weight       lower = higher up the tab list (and higher priority)
+#   default      true marks this as the default rank for new players
+#   inherits     other ranks whose permissions are also granted
+#   permissions  permission nodes granted by this rank
+#                (prefix a node with "-" to explicitly deny it)
+#
+# The essentials.* / essentials.staff / essentials.player bundles are the
+# same ones declared in plugin.yml, so you can hand them out per-rank here.
+# =====================================================================
+
+default-rank: member
+
+ranks:
+  owner:
+    display: "Owner"
+    prefix: "&#FF4444&lOWNER &r"
+    suffix: ""
+    color: "&c"
+    weight: 1
+    permissions:
+      - "essentials.*"
+
+  admin:
+    display: "Admin"
+    prefix: "&c&lADMIN &r"
+    suffix: ""
+    color: "&c"
+    weight: 10
+    inherits:
+      - mod
+    permissions:
+      - "essentials.staff"
+      - "essentials.admin"
+      - "essentials.rank.admin"
+
+  mod:
+    display: "Mod"
+    prefix: "&2&lMOD &r"
+    suffix: ""
+    color: "&a"
+    weight: 20
+    permissions:
+      - "essentials.staff"
+
+  vip:
+    display: "VIP"
+    prefix: "&6&lVIP &r"
+    suffix: ""
+    color: "&e"
+    weight: 50
+    permissions:
+      - "essentials.player"
+      - "essentials.kit.vip"
+
+  member:
+    display: "Member"
+    prefix: "&7"
+    suffix: ""
+    color: "&7"
+    weight: 100
+    default: true
+    permissions:
+      - "essentials.player"

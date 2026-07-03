@@ -1,0 +1,151 @@
+# =====================================================================
+#  CustomEssentials - Main Configuration
+# =====================================================================
+# Two feature groups are configured here: "regular" and "staff".
+# Each can be toggled and tuned independently. Permissions still gate
+# every command (see plugin.yml), these toggles let you disable a whole
+# subsystem server-wide without touching permissions.
+# =====================================================================
+
+config-version: 1
+
+general:
+  # Prefix shown before most plugin messages. Supports & color codes and
+  # hex colors in the form &#RRGGBB.
+  prefix: "&8[&bEssentials&8] &r"
+  # Use the messages.yml file for all user-facing text.
+  use-messages-file: true
+
+# ---------------------------------------------------------------------
+#  REGULAR PLAYER FEATURES
+# ---------------------------------------------------------------------
+regular:
+  homes:
+    enabled: true
+    # Default max homes for players without a specific permission.
+    # Per-rank override permission: essentials.homes.<number> e.g. essentials.homes.5
+    default-max-homes: 3
+    teleport-delay-seconds: 3        # warmup before teleport (0 = instant)
+    cancel-on-move: true             # cancel warmup if the player moves
+  warps:
+    enabled: true
+    teleport-delay-seconds: 3
+  spawn:
+    enabled: true
+    teleport-on-first-join: true     # send brand-new players to spawn
+    teleport-on-respawn: false       # send players to spawn when they die
+  tpa:
+    enabled: true
+    request-timeout-seconds: 60
+  back:
+    enabled: true
+    # Record location on death so /back returns to the death point.
+    on-death: true
+  messaging:
+    enabled: true
+    social-spy: true                 # staff with permission see private msgs
+    format-sender: "&7[me -> {target}] &f{message}"
+    format-receiver: "&7[{sender} -> me] &f{message}"
+  afk:
+    enabled: true
+    auto-afk-seconds: 300            # 0 disables auto-AFK
+    broadcast: true
+
+# ---------------------------------------------------------------------
+#  STAFF FEATURES
+# ---------------------------------------------------------------------
+staff:
+  vanish:
+    enabled: true
+    # Hide join/leave messages when a vanished staff toggles vanish.
+    fake-quit-message: false
+    # Effects applied while vanished.
+    night-vision: true
+    no-mob-targeting: true
+  staff-chat:
+    enabled: true
+    format: "&8[&cStaff&8] &7{player}&8: &f{message}"
+  freeze:
+    enabled: true
+    # Distance a frozen player can move before being pulled back (blocks).
+    leash-radius: 1.0
+    message: "&cYou have been frozen by staff. Do not log out."
+  god:
+    enabled: true
+  moderation:
+    enabled: true
+    # Default reason when none supplied.
+    default-kick-reason: "Kicked by an operator."
+    default-ban-reason: "Banned by an operator."
+    broadcast-bans: true
+    broadcast-kicks: true
+
+# ---------------------------------------------------------------------
+#  KITS  (full definitions live in kits.yml)
+# ---------------------------------------------------------------------
+kits:
+  enabled: true
+  # Give this kit automatically the first time a player joins. "" = none.
+  first-join-kit: "starter"
+  # If a kit is on cooldown, tell the player remaining time.
+  show-cooldown-remaining: true
+
+
+# =====================================================================
+#  Tab list / MOTD / Welcome (ranks-aware)
+# =====================================================================
+# Tokens you can use in tab/motd/welcome text:
+#   {player}  - the player's name (works without PlaceholderAPI)
+#   {online}  - current online count
+#   {max}     - max player slots
+# Plus any %placeholder% from PlaceholderAPI (if installed), e.g.
+#   %player_name%, %vault_rank%, %server_tps%, %kush_rank%, %kush_rank_prefix%
+
+tab:
+  enabled: true
+  update-interval-seconds: 3      # how often header/footer refresh (placeholders)
+  sort-by-rank: true              # group players in tab by rank weight
+  header:
+    - "&#55FFFF&lKushSMP"
+    - "&7Welcome, &f{player}"
+  footer:
+    - "&7Online: &f{online}&7/&f{max}"
+    - "&8play.kushsmp.net"
+
+motd:
+  enabled: true
+  line1: "&#55FFFF&lKushSMP &8| &fCustom core, fresh vibes"
+  line2: "&7Come hang out &8» &fplay.kushsmp.net"
+
+welcome:
+  title:
+    enabled: true
+    fade-in-ms: 500
+    stay-ms: 3500
+    fade-out-ms: 1000
+    title: "&#55FFFFWelcome"
+    subtitle: "&7{player}"
+  # Shown instead of the above the very first time a player joins.
+  first-join:
+    title: "&#55FF55Welcome to KushSMP"
+    subtitle: "&7Enjoy your stay, &f{player}"
+  # Optional chat-message overrides. Leave disabled to keep vanilla messages.
+  join-message:
+    enabled: false
+    message: "&8[&a+&8] &7{player}"
+  first-join-message:
+    enabled: true
+    message: "&#55FF55Welcome &f{player} &#55FF55to the server for the first time!"
+
+
+# =====================================================================
+#  Economy
+# =====================================================================
+economy:
+  enabled: true
+  pay-enabled: true              # allow players to use /pay
+  currency-symbol: "$"           # shown before amounts, e.g. $1,234.50
+  currency-name-singular: "Coin"
+  currency-name-plural: "Coins"
+  starting-balance: 100.0        # balance new players effectively start with
+  min-payment: 1.0               # smallest allowed /pay amount
