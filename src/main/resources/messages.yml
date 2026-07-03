@@ -88,6 +88,14 @@ kit:
   list: "{prefix}&7Available kits: &f{kits}"
   given: "{prefix}&aGave the &e{kit}&a kit to &e{player}&a."
   received: "{prefix}&aYou received the &e{kit}&a kit."
+  menu-title: "&8Kit Selector"
+  none-available: "{prefix}&7You don't have access to any kits."
+  created: "{prefix}&aCreated kit &e{kit}&a from your inventory."
+  create-usage: "{prefix}&cUsage: &7/kit create <name>"
+  already-exists: "{prefix}&cA kit named &e{kit}&c already exists."
+  empty-inventory: "{prefix}&cYour inventory is empty - nothing to save."
+  delete-usage: "{prefix}&cUsage: &7/kit delete <name>"
+  deleted: "{prefix}&aDeleted the &e{kit}&a kit."
 
 vanish:
   on: "{prefix}&7You are now &avanished&7."

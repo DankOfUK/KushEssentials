@@ -5,6 +5,8 @@
 #
 #  cooldown    : seconds between claims. -1 = one time only, 0 = no cooldown
 #  permission  : node required to claim. Defaults to essentials.kit.<name>
+#  display     : name shown in the /kit GUI selector (default: capitalized key)
+#  icon        : Material used as the GUI icon (default: the kit's first item)
 #  items       : list of item entries
 #       material : Bukkit Material name (e.g. DIAMOND_SWORD)
 #       amount   : stack size (default 1)

@@ -128,8 +128,8 @@ commands:
 
   # ---------- Kits ----------
   kit:
-    description: Claim a kit.
-    usage: /kit [name]
+    description: Open the kit selector, or claim/create/delete a kit.
+    usage: /kit [name|create <name>|delete <name>|list]
     aliases: [kits]
   givekit:
     description: Give a kit to a player (staff).

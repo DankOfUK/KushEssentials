@@ -117,6 +117,7 @@ public class CustomEssentials extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ChatListener(this), this);
         getServer().getPluginManager().registerEvents(new ConnectionListener(this), this);
         getServer().getPluginManager().registerEvents(new ServerListListener(this), this);
+        getServer().getPluginManager().registerEvents(new com.kushsmp.essentials.gui.KitMenuListener(this), this);
 
         // Catch up anyone already online (e.g. after a /reload).
         for (Player online : getServer().getOnlinePlayers()) {

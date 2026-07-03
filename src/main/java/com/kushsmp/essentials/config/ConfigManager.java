@@ -89,6 +89,15 @@ public class ConfigManager {
         }
     }
 
+    /** Persist in-memory changes to kits.yml (used by /kit create and /kit delete). */
+    public void saveKits() {
+        try {
+            kits.save(new File(plugin.getDataFolder(), "kits.yml"));
+        } catch (IOException e) {
+            plugin.getLogger().warning("Could not save kits.yml: " + e.getMessage());
+        }
+    }
+
     public void saveData(String name) {
         FileConfiguration cfg = dataFiles.get(name);
         File file = dataFileHandles.get(name);

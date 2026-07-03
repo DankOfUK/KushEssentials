@@ -13,7 +13,7 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -239,6 +239,143 @@ public class KitManager {
             String parsed = command.replace("{player}", player.getName());
             plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), parsed);
         }
+    }
+
+    // ---------------------------------------------------------------------
+    //  Kit creation / deletion (admin)
+    // ---------------------------------------------------------------------
+
+    /** Outcome of a {@link #createKit} attempt. */
+    public enum CreateResult { CREATED, ALREADY_EXISTS, EMPTY }
+
+    /**
+     * Build a new kit from the player's current inventory (storage slots,
+     * off-hand and worn armor) and persist it to kits.yml with no cooldown.
+     */
+    public CreateResult createKit(Player player, String name) {
+        name = name.toLowerCase();
+        if (kitExists(name)) {
+            return CreateResult.ALREADY_EXISTS;
+        }
+
+        PlayerInventory inv = player.getInventory();
+        List<Map<String, Object>> items = new ArrayList<>();
+        for (ItemStack stack : inv.getStorageContents()) {
+            if (stack != null && stack.getType() != Material.AIR) {
+                items.add(serializeItem(stack));
+            }
+        }
+        ItemStack offHand = inv.getItemInOffHand();
+        if (offHand != null && offHand.getType() != Material.AIR) {
+            items.add(serializeItem(offHand));
+        }
+
+        Map<String, Object> armor = new LinkedHashMap<>();
+        putArmor(armor, "helmet", inv.getHelmet());
+        putArmor(armor, "chestplate", inv.getChestplate());
+        putArmor(armor, "leggings", inv.getLeggings());
+        putArmor(armor, "boots", inv.getBoots());
+
+        if (items.isEmpty() && armor.isEmpty()) {
+            return CreateResult.EMPTY;
+        }
+
+        String base = "kits." + name + ".";
+        kits().set(base + "cooldown", 0);
+        kits().set(base + "permission", "essentials.kit." + name);
+        if (!items.isEmpty()) {
+            kits().set(base + "items", items);
+        }
+        if (!armor.isEmpty()) {
+            kits().set(base + "armor", armor);
+        }
+        plugin.config().saveKits();
+        return CreateResult.CREATED;
+    }
+
+    /** Delete a kit from kits.yml. Returns false if it didn't exist. */
+    public boolean deleteKit(String name) {
+        name = name.toLowerCase();
+        if (!kitExists(name)) {
+            return false;
+        }
+        kits().set("kits." + name, null);
+        plugin.config().saveKits();
+        return true;
+    }
+
+    private void putArmor(Map<String, Object> armor, String slot, ItemStack piece) {
+        if (piece != null && piece.getType() != Material.AIR) {
+            armor.put(slot, serializeItem(piece));
+        }
+    }
+
+    /** Inverse of {@link #buildItem}: turn an ItemStack into a kits.yml config map. */
+    private Map<String, Object> serializeItem(ItemStack stack) {
+        Map<String, Object> map = new LinkedHashMap<>();
+        map.put("material", stack.getType().name());
+        if (stack.getAmount() != 1) {
+            map.put("amount", stack.getAmount());
+        }
+        ItemMeta meta = stack.getItemMeta();
+        if (meta != null) {
+            if (meta.hasDisplayName()) {
+                map.put("name", meta.getDisplayName().replace('§', '&'));
+            }
+            if (meta.hasLore() && meta.getLore() != null) {
+                List<String> lore = new ArrayList<>();
+                for (String line : meta.getLore()) {
+                    lore.add(line.replace('§', '&'));
+                }
+                map.put("lore", lore);
+            }
+            if (meta.isUnbreakable()) {
+                map.put("unbreakable", true);
+            }
+            if (meta.hasEnchants()) {
+                Map<String, Object> enchants = new LinkedHashMap<>();
+                for (Map.Entry<Enchantment, Integer> entry : meta.getEnchants().entrySet()) {
+                    enchants.put(entry.getKey().getKey().getKey(), entry.getValue());
+                }
+                map.put("enchants", enchants);
+            }
+        }
+        return map;
+    }
+
+    // ---------------------------------------------------------------------
+    //  GUI helpers
+    // ---------------------------------------------------------------------
+
+    /** Display name for the menu: the kit's configured {@code display}, else its capitalized name. */
+    public String displayName(String name) {
+        String display = kits().getString("kits." + name.toLowerCase() + ".display");
+        if (display != null) {
+            return display;
+        }
+        String lower = name.toLowerCase();
+        return Character.toUpperCase(lower.charAt(0)) + lower.substring(1);
+    }
+
+    /** Icon material for the menu: configured {@code icon}, else the first item, else CHEST. */
+    public Material iconMaterial(String name) {
+        String configured = kits().getString("kits." + name.toLowerCase() + ".icon");
+        if (configured != null) {
+            Material match = Material.matchMaterial(configured.toUpperCase());
+            if (match != null) {
+                return match;
+            }
+        }
+        for (Map<?, ?> raw : kits().getMapList("kits." + name.toLowerCase() + ".items")) {
+            Object mat = raw.get("material");
+            if (mat != null) {
+                Material match = Material.matchMaterial(mat.toString().toUpperCase());
+                if (match != null) {
+                    return match;
+                }
+            }
+        }
+        return Material.CHEST;
     }
 
     /** Result of a claim attempt. */
